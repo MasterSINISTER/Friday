@@ -116,38 +116,12 @@ def execute_command(command):
     elif "browser" in command:
         os.system("start msedge")  # Use "msedge" to open Microsoft Edge
     elif "shutdown" in command:
-        rec = sr.Recognizer()
-        with sr.Microphone() as source:
-            FridayVoice("Are You Sure you want to Shutdown ?")
-            rec.adjust_for_ambient_noise(source, duration=1)
-            audio = rec.listen(source)
-        try:
-            text = rec.recognize_google(audio)
-        except sr.UnknownValueError:
-            FridayVoice("I did not get that")
-        except sr.RequestError:
-            FridayVoice("Error: Request error.")
-        if(text=="yes"):
+        FridayVoice("Are You Sure you want to Shutdown ?")
+        response = getVoice().lower()
+        if response == "yes":
             os.system("shutdown /p")
         else:
-            while True:
-                rec = sr.Recognizer()
-                with sr.Microphone() as source:
-                    print("Commmand :")
-                    rec.adjust_for_ambient_noise(source, duration=1)
-                    audio = rec.listen(source)
-                try:
-                    text = rec.recognize_google(audio)
-                    print("I Heard:", text)
-                    execute_command(text.lower())
-                except sr.UnknownValueError:
-                    print("I did not get that")
-                except sr.RequestError:
-                    print("Error: Request error.")
-
-
-
-
+            execute_command(getVoice().lower())
     elif "exit" in command:
         thankPrompt = "Have a Good Day , Sir"
         FridayVoice(thankPrompt)
@@ -166,7 +140,7 @@ def execute_command(command):
         rec = sr.Recognizer()
         with sr.Microphone() as source:
             Friday("What do you want to watch Sir?")
-            rec.adjust_for_ambient_noise(source, duration=1)
+            # rec.adjust_for_ambient_noise(source, duration=1)
             audio = rec.listen(source)
         try:
             text = rec.recognize_google(audio)
@@ -207,10 +181,10 @@ def execute_command(command):
     elif "private" in command:
         Friday("Private Search Executed ! , What you want to Search")
         getPrivateSearch()
-    elif "Download Video" in command:
+    elif "download video" in command:
         Friday("URL Please ! :")
         link =input("Enter URL : ")
-        print("Please Wait ! ")
+        FridayVoice("Downloading The Video")
         getYTDownload(link)
 
 
@@ -237,7 +211,6 @@ def Friday(greet):
         engine.setProperty('voice', 'com.apple.speech.synthesis.voice.Alex')
         engine.say(greet)
         engine.runAndWait()
-
     except Exception as e:
         print("Unknown Error Occurred!")
 # Sample functions (getLogin, getERP, help, etc.) should be defined based on the specific functionalities you want to implement.
@@ -248,30 +221,19 @@ print("Friday Mark I [BETA]")
 FridayVoice("Welcome Sir!")
 FridayVoice("Where You want to Start First !")
 # Start voice recognition
+mic=sr.Microphone(device_index=1)
 while True:
-
     rec = sr.Recognizer()
-
     with sr.Microphone() as source:
-
         print("Command:")
-
         rec.adjust_for_ambient_noise(source, duration=1)
-
+        # time.sleep(0.5)
         audio = rec.listen(source)
-
     try:
-
         text = rec.recognize_google(audio)
-
         print("I Heard:", text)
-
         execute_command(text.lower())
-
     except sr.UnknownValueError:
-
         print("I did not get that")
-
     except sr.RequestError as e:
-
         print("Error:", e)
