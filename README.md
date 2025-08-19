@@ -48,10 +48,6 @@ Friday: Hello Master, how can I assist you today?
 Friday: Executing backup script...
 ```
 
-## ⚙️ Configuration
-- Edit `config.json` (if exists) to set preferences like API keys, schedules, or default commands.  
-- You can extend Friday by adding Python modules in the `modules/` directory.  
-
 ## 🛠️ Roadmap / To-Do
 - [ ] Add natural language processing for flexible commands  
 - [ ] Integrate with external APIs (weather, news, system stats)  
