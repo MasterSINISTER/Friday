@@ -52,16 +52,6 @@ Friday: Executing backup script...
 - Edit `config.json` (if exists) to set preferences like API keys, schedules, or default commands.  
 - You can extend Friday by adding Python modules in the `modules/` directory.  
 
-## 🏗️ Project Structure
-```
-Friday/
-├── friday.py          # Main entry point
-├── modules/           # Additional feature modules
-├── requirements.txt   # Python dependencies
-├── config.json        # Configuration (optional)
-└── README.md          # Documentation
-```
-
 ## 🛠️ Roadmap / To-Do
 - [ ] Add natural language processing for flexible commands  
 - [ ] Integrate with external APIs (weather, news, system stats)  
